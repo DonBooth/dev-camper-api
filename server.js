@@ -1,3 +1,18 @@
+//   How to load external javascript
+{
+    /* <head>
+      <title><%= name %></title>
+      <script src="../javascripts/p5/p5.js"></script>
+      <script src="../javascripts/p5/addons/p5.dom.js"></script>
+      <script src="../javascripts/p5/addons/p5.sound.js"></script>
+      <% for(var i = 0; i < extraScripts.length; i++) { %>
+        <script src="<%= "../javascripts/" + extraScripts[i]%>" ></script>
+      <% }%>
+      <script src="<%= "../javascripts/experiments/"+name + "/sketch.js"%>"></script>
+      <style> body {padding: 0; margin: 0;} </style>
+    </head> */
+}
+
 const express = require('express')
 const dotenv = require('dotenv')
 const fileUpload = require('express-fileupload')
@@ -41,6 +56,8 @@ if (process.env.NODE_ENV == 'development') {
     app.use(morgan('dev'))
 }
 
+//      MIDDLEWARE
+
 // file upload middleware
 app.use(fileUpload())
 
@@ -60,7 +77,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 // and must run AFTER body parser aka. express.json
 app.use(mongoSanitize())
 // set security headers
-app.use(helmet())
+app.use(helmet({
+    contentSecurityPolicy: false,
+}))
 // prevent cross site scripting
 app.use(xssClean())
 app.use(hpp())
@@ -71,6 +90,9 @@ const rateLimiter = expressRateLimit({
 app.use(rateLimiter)
 app.use(cors())
 
+// set template engine
+app.set('view engine', 'ejs')
+
 
 // Mount Routers
 app.use('/api/v1/bootcamps', bootcamps)
@@ -78,6 +100,9 @@ app.use('/api/v1/courses', courses)
 app.use('/api/v1/auth', auth)
 app.use('/api/v1/users', users)
 app.use('/api/v1/reviews', reviews)
+app.get('/', function (req, res) {
+    res.render('pages/index')
+})
 
 // Error Handler - must come after router to catch mistakes from router
 app.use(errorHandler)

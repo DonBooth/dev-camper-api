@@ -8,15 +8,21 @@ const {
     forgotpassword,
     resetpassword,
     updateUserDetails,
-    updatePassword
+    updatePassword,
+    registerForm,
+    loginForm,
+    profile
 } = require('../controllers/auth')
 const {
     protect
 } = require('../middleware/auth')
 
+router.get('/register', registerForm)
 router.post('/register', register)
+router.get('/login', loginForm)
 router.post('/login', login)
 router.get('/me', protect, getMe)
+router.get('/profile', protect, profile)
 router.get('/logout', protect, logout)
 router.post('/forgotpassword', forgotpassword)
 router.put('/resetpassword/:resettoken', resetpassword)

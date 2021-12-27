@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div class="jumbotron">
+            <h1>Courses</h1>
+            <p>The Courses</p>
+        </div>
+
+        <p><%= bootcamps[0] %></p>
+        <% for(var i=0; i < bootcamps.length; i++) { %>
+        <ul>
+            <li><%= bootcamps[i].title %></li>
+            <li><%= bootcamps[i].description %></li>
+            <li>Bootcamp: <%= bootcamps[i].bootcamp.name %></li>
+        </ul>
+        <% } %>
+
+
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+</body>
+
+</html>

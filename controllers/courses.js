@@ -27,7 +27,11 @@ exports.getCourses = asyncHandler(async (req, res, next) => {
         })
     } else {
         // this gets ALL courses
-        res.status(200).json(res.advancedResults)
+        // res.status(200).json(res.advancedResults)
+        console.log('bootcamp: ', res.advancedResults)
+        res.status(200).render('pages/courses', {
+            bootcamps: res.advancedResults.data
+        })
     }
 })
 

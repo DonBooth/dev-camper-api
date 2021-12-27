@@ -7,9 +7,21 @@ https://learning-oreilly-com.ezproxy.torontopubliclibrary.ca/videos/node-js-api-
 an O'Reilly course via Toronto Public Library.
 Node.js API Masterclass with Express and mongodb
 
+<<<=====   ADDING  << SOCKET.IO >>  TO  << ROUTES >>    =====>>>
+
+https://coderedirect.com/questions/171600/how-to-use-socket-io-in-express-routes
 
 
-<<<=====   POPULATE   =====>>>
+<<<=====   P5.js  -  DRAWING   =====>>>
+P5.JS 
+
+Draw & Save - work in SVG 
+https://github.com/zenozeng/p5.js-svg
+
+
+
+
+
 
 
 BELOW IS THE TEXT FROM THE COURSE

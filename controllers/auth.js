@@ -1,8 +1,28 @@
 const ErrorResponse = require('../utils/errorResponse')
 const asyncHandler = require('../middleware/async_handler')
 const User = require('../models/User')
+const Bootcamp = require('../models/Bootcamp')
 const sendEmail = require('../utils/sendEmail')
 const crypto = require('crypto')
+
+
+// @desc Get the form to register
+// @route GET /api/v1/auth/register
+// @access public
+exports.registerForm = (req, res, next) => {
+    res.render('pages/registerForm', {
+        scripts: '<script src="/../../js/register.js"></script>'
+    });
+}
+
+// @desc Get the form to login
+// @route GET /api/v1/auth/login
+// @access public
+exports.loginForm = (req, res, next) => {
+    res.render('pages/loginForm', {
+        scripts: '<script src="/../../js/login.js"></script> '
+    });
+}
 
 // @desc Register user
 // @route POST /api/v1/auth/register
@@ -16,7 +36,7 @@ exports.register = asyncHandler(async (req, res, next) => {
         role
     } = req.body
 
-    // creat user
+    // create user
     const user = await User.create({
         email,
         password,
@@ -28,7 +48,7 @@ exports.register = asyncHandler(async (req, res, next) => {
 })
 
 
-// @desc Login user
+// @desc Login user  
 // @route POST /api/v1/auth/login
 // @access public
 exports.login = asyncHandler(async (req, res, next) => {
@@ -37,7 +57,7 @@ exports.login = asyncHandler(async (req, res, next) => {
         email,
         password
     } = req.body
-
+    console.log(req.body)
     // Validate email and password
     if (!email || !password) {
         return next(new ErrorResponse('please provide your email and password', 400))
@@ -61,6 +81,27 @@ exports.login = asyncHandler(async (req, res, next) => {
 
 })
 
+//  @desc   Get current logged in user profile
+//  @route  Get /api/v1/auth/profile
+//  @access Private
+exports.profile = asyncHandler(async (req, res, next) => {
+
+    const user = await User.findById(req.user.id)
+
+    const usersBootcamp = await Bootcamp.findOne({
+        user: req.user.id
+    })
+    console.log(usersBootcamp)
+
+
+    res.status(200).render('pages/profile', {
+        data: user,
+        success: true,
+        scripts: ''
+    })
+})
+
+
 
 //  @desc   Get current logged in user
 //  @route  Get /api/v1/auth/me
@@ -68,6 +109,7 @@ exports.login = asyncHandler(async (req, res, next) => {
 exports.getMe = asyncHandler(async (req, res, next) => {
 
     const user = await User.findById(req.user.id)
+
 
     res.status(200).json({
         success: true,

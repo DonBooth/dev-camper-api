@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div class="jumbotron">
+            <h1>Register</h1>
+            <p>Welcome</p>
+        </div>
+
+        <!-- <input type="text" name="name" placeholder="name" id="name">
+        <button onclick="send()">Send</button> -->
+
+        <form>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="name" class="form-control" id="name" name="name" type="text">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password">
+            </div>
+            <!-- <div class="mb-3">
+                <label for="role" class="form-label">Role</label>
+                <input type="role" class="form-control" id="role">
+            </div> -->
+            <div class="mb-3">
+                <label for="role" class="form-label">Role</label>
+                <select class="form-select" aria-label="Select your role." id="role">
+                    <option selected>Please choose your role</option>
+                    <option value="user">User</option>
+                    <option value="admin">Administrator</option>
+                    <option value="publisher">Publisher</option>
+                </select>
+            </div>
+
+            <button id="registrationForm" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+</body>
+<%- scripts %>
+
+</html>
